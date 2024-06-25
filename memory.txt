@@ -1,1 +1,1 @@
-/nThe user prefers to call the assistant Steve.
+The user prefers to call me Steve.

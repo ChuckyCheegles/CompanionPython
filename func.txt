@@ -1,0 +1,382 @@
+[
+	{ 
+		"type": "file_search" 
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "get_time",
+		  "description": "Determine the time",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "time_zone": {
+				"type": "string",
+				"description": "The time zone of where you're trying to get the time."
+			  },
+			  "format": {
+				"type": "string",
+				"enum": [
+				  "12hr",
+				  "24hr"
+				]
+			  }
+			},
+			"required": [
+			  "time_zone"
+			]
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "get_date",
+		  "description": "Determine the time",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "time_zone": {
+				"type": "string",
+				"description": "The time zone of where you're trying to get the date."
+			  }
+			},
+			"required": [
+			  "time_zone"
+			]
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "get_exact_loc",
+		  "description": "Determine the exact location of the user",
+		  "parameters": {
+			"type": "object",
+			"properties": {},
+			"required": []
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "get_current_weather",
+		  "description": "Determine weather in a location with the latitude and longitude. You can also use this tool to retrieve weather adjacent data like the moon phase or cloud cieling and floor.",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "location": {
+				"type": "string",
+				"description": "The latitude and longitude of wher you'd like the weather e.g. 42.3478,-71.0466"
+			  },
+			  "unit": {
+				"type": "string",
+				"description": "The unit you'd like the forecast in.",
+				"enum": [
+				  "c",
+				  "f"
+				]
+			  },
+			  "timestep": {
+				"type": "string",
+				"description": "The timestep for the forecast. e.g. daily for each day and hourly for every hour",
+				"enum": [
+				  "daily",
+				  "hourly"
+				]
+			  }
+			},
+			"required": [
+			  "location",
+			  "unit"
+			]
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "convert_city",
+		  "description": "Convert a latitude and longitude to a city name.",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "latitude": {
+				"type": "string",
+				"description": "The latitude of the city"
+			  },
+			  "longitude": {
+				"type": "string",
+				"description": "The longitude of the city"
+			  }
+			},
+			"required": [
+			  "latitude",
+			  "longitude"
+			]
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "test_tools",
+		  "description": "Determine whether tools are working on the current thread. This doesn't test all your tools. It only tests if you have access to tools in your current conversation.",
+		  "parameters": {
+			"type": "object",
+			"properties": {},
+			"required": []
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "convert_to_coords",
+		  "description": "Convert a city name to latitude and longitude.",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "city_name": {
+				"type": "string",
+				"description": "The latitude of the city"
+			  }
+			},
+			"required": [
+			  "city_name"
+			]
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "new_note",
+		  "description": "Saves a note to your notes file",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "note_to_add": {
+				"type": "string",
+				"description": "The note you'd like to add to your notes file."
+			  }
+			},
+			"required": [
+			  "note_to_add"
+			]
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "read_notes",
+		  "description": "This function will read your notes file back to you.",
+		  "parameters": {
+			"type": "object",
+			"properties": {},
+			"required": []
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "overwrite_notes",
+		  "description": "Overwrites your entire notes file. This will delete everything in your notes file and replace it with new notes. You can use this to get rid of notes you dont need anymore or to delete your entire notes file.",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "notes_to_replace_with": {
+				"type": "string",
+				"description": "The note you'd like to overwrite your original notes with."
+			  }
+			},
+			"required": []
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "new_memory",
+		  "description": "Saves data you'd like to be able to remember between conversations such as birthdays or other data relevant to the user.",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "memory_to_commit": {
+				"type": "string",
+				"description": "The memory you'd like to save"
+			  }
+			},
+			"required": [
+			  "memory_to_commit"
+			]
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "overwrite_memory",
+		  "description": "Overwrites all of your memories. Use this if you'd like to forget something or replace your memories with other memories.",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "memories": {
+				"type": "string",
+				"description": "The memories you'd like to replace your orginal memories with."
+			  }
+			},
+			"required": []
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "read_memories",
+		  "description": "This function will read your memories back to you.",
+		  "parameters": {
+			"type": "object",
+			"properties": {},
+			"required": []
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "read_file",
+		  "description": "This function will read any file specified on the user's device",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "file_name": {
+				"type": "string",
+				"description": "The file you'd like to access. e.g. file_name.txt"
+			  }
+			},
+			"required": [
+			  "file_name"
+			]
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "create_file",
+		  "description": "Creates a file on the user's device with four arguments. Your descriptions show an example of how to make a file named test.txt",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "file_type": {
+				"type": "string",
+				"description": "The type of file you'd like to create. e.g. txt"
+			  },
+			  "file_name": {
+				"type": "string",
+				"description": "The name of the file you'd like to create. e.g. test"
+			  },
+			  "file_content": {
+				"type": "string",
+				"description": "The content of the file you'd like to create."
+			  },
+			  "file_write_type": {
+				"type": "string",
+				"description": "The write type you'd like to work with. Binary mode or text mode.",
+				"enum": [
+				  "b",
+				  "t"
+				]
+			  }
+			},
+			"required": [
+			  "file_type",
+			  "file_name"
+			]
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "modify_file",
+		  "description": "Overwrites a file in it's entirely. You can use this in conjuction with read_file to modify a file or just empty it completely.",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "file_name": {
+				"type": "string",
+				"description": "The name of the file you'd like to overwrite."
+			  },
+			  "file_content": {
+				"type": "string",
+				"description": "The content you'd like to overwrite the file with."
+			  }
+			},
+			"required": [
+			  "file_name"
+			]
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "custom_api_call",
+		  "description": "This function can be used to make a custom API call to any url you choose.",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "call_url": {
+				"type": "string",
+				"description": "The url of the api call"
+			  },
+			  "call_type": {
+				"type": "string",
+				"description": "The type of API call you'd like to make.",
+				"enum": [
+				  "post",
+				  "get"
+				]
+			  },
+			  "call_data": {
+				"type": "string",
+				"description": "The data you'd like to send with your API call",
+				"enum": [
+				  "daily",
+				  "hourly"
+				]
+			  }
+			},
+			"required": [
+			  "call_url",
+			  "call_type"
+			]
+		  }
+		}
+	},
+	{
+		"type": "function",
+		"function": {
+		  "name": "search",
+		  "description": "This function will perform a Google search.",
+		  "parameters": {
+			"type": "object",
+			"properties": {
+			  "query": {
+				"type": "string",
+				"description": "The search query you'd like to search Google for."
+			  }
+			},
+			"required": [
+			  "query"
+			]
+		  }
+		}
+	}
+]

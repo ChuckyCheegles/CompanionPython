@@ -26,3 +26,8 @@ def newline(thread_id):
     file = open(f"thread_log\\{thread_id}.txt", "a")
     file.write("\n------------------------------------------------\n")
     file.close()
+    
+def newline_no_dash(thread_id):
+    file = open(f"thread_log\\{thread_id}.txt", "a")
+    file.write("\n")
+    file.close()

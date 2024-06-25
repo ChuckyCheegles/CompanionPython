@@ -1,0 +1,9 @@
+# Required libraries
+openai
+python_dotenv
+pytz
+googlemaps
+requests
+pygame
+SpeechRecognition
+keyboard

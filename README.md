@@ -32,7 +32,7 @@ This program has **2** files that are used when defining an assistant.
 - Get a **Google** API key - ***Optional***
 - Get a **ScaleSERP** API key - ***Optional***
 - Get a **Tomorrow.IO** API key - ***Optional***
-- Rename `RenameThisFile.env` to `.env`
+- Rename `RenameThisFile.env` to `.env` - ***Only if building from source - Release builds already have this change***
 - Place your API keys in the `.env` settings file
 - Edit the 'func.txt' file - ***Optional***
 - Edit the instructions in the `.env` file - ***Optional***

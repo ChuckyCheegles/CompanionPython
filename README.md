@@ -29,8 +29,9 @@ This program has **2** files that are used when defining an assistant.
 - Get a **Google** API key - ***Optional***
 - Get a **ScaleSERP** API key - ***Optional***
 - Get a **Tomorrow.IO** API key - ***Optional***
-- Place your API keys in the .env settings file
+- Rename `RenameThisFile.env` to `.env`
+- Place your API keys in the `.env` settings file
 - Edit the 'func.txt' file - ***Optional***
-- Edit the instructions in the .env file - ***Optional***
+- Edit the instructions in the `.env` file - ***Optional***
 - Run `pip install -r requirements.txt` from within the program's folder
 - Run `python RunCompanion.py`

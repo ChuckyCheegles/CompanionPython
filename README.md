@@ -7,6 +7,9 @@ This program has two operating modes. Conversational and textual. It uses two di
 - **Textual** - In textual mode the script runs just like any chat bot. You can query the assistant by just typing your query and pressing enter. However, there is a set of commands you can input that will not be sent as queries and is mainly for debugging or ease of use.
 - **Conversational** - In conversational mode the assistant acts more like a voice assistant. You can talk to it and the script will use Google's speech recognition service to turn your speech into a query. TTS responses are optional.
 
+### Logging
+As well as allowing you to change thread IDs and save files to your machine written by the assistant this script has an in depth logging system. Each conversation you have through this program will be saved to a `.txt` file in the `thread_logs\` folder. These logs save tool calls, assistant responses, user queries, and tool arguments. I tried to make it as easy as possible to read while storing as much relevant data as possible. 
+
 ### Commands
 This program has a few commands the user can input while in textual mode to change how the program operates or change settings.
 1. **help** - Displays a help dialog

@@ -52,7 +52,7 @@ global listening
 speech = False
 speech_file = "output.mp3"
 listening = False
-hotkeys = False
+hotkeys = True
 files_array = []
 vector_store_id = ""
 
@@ -205,6 +205,7 @@ def speak():
     speech_output = pygame.mixer.Sound(speech_file)
     pygame.mixer.Sound.play(speech_output)
     speech_array = []
+    sleep(pygame.mixer.Sound.get_length(speech_output))
 
 def stop_speech():
     try:
@@ -257,13 +258,26 @@ def toggle_listening():
     global listening
     listening = not listening
     print(Fore.MAGENTA + f"System: Conversational Mode Set To {listening}")
+    sleep(0.5)
 
 def toggle_speech():
     global speech
     speech = not speech
     state = "Enabled" if speech else "Disabled"
     print(Fore.MAGENTA + f"System: Speech {state}")
-    
+    sleep(0.5)
+
+def toggle_hotkeys():
+    global hotkeys
+    if hotkeys:
+        hotkeys = False
+        keyboard.unhook_all()
+    else:
+        hotkeys = True
+        keyboard.add_hotkey('q', toggle_listening)
+        keyboard.add_hotkey('space', toggle_speech)
+        keyboard.add_hotkey('x', stop_speech)
+        
 def del_ass(assid):
     client.beta.assistants.delete(assid)
     print(Fore.MAGENTA + f"System: Deleted Assistant with ID {assid} from OpenAI Servers")
@@ -341,6 +355,7 @@ class EventHandler(AssistantEventHandler):
       if tool.function.name == "get_time":
         # Parse arguments into internal variable
         timezone_str = arguments.get("time_zone", "UTC")
+        time_format = arguments.get("format", "12hr")
         
         try:
           timezone = pytz.timezone(timezone_str)
@@ -348,10 +363,9 @@ class EventHandler(AssistantEventHandler):
           tool_outputs.append({"tool_call_id": tool.id, "output": "Timezone unrecognized. Please use a timezone in the pytz python library. e.g. America/New York"})
         
         now = datetime.now(timezone)
-        time_format = arguments.get("format", "12hr")
         
         if time_format == "12hr":
-          current_time = now.strftime('%H:%M:%S')
+          current_time = now.strftime('%I:%M%p')
         elif time_format == "24hr":
           current_time = now.strftime('%H:%M:%S')
         else:
@@ -602,7 +616,7 @@ def run_assistant():
     # Start Main Loop
     while True:
         # Set Variables and formatting
-        global hotkeys, vector_store_id, files_array
+        global vector_store_id, files_array
         if listening:
             print(Fore.WHITE + f"Assistant ID: {vassistant.id} - Thread ID: {thread_id}")
         else:
@@ -610,21 +624,14 @@ def run_assistant():
         print(Fore.WHITE + "-------------------------------------------------------------------------------------------")
         user_data = f"<Location: {get_current_location()} Latitude:{get_latitude()} Longitude:{get_longitude()}><Device:{get_device_info()}><Query Time:{get_current_time()}>" # User data part of query
         
-        if listening == True:
-            keyboard.add_hotkey('q', toggle_listening)
-            keyboard.add_hotkey('space', toggle_speech)
-            keyboard.add_hotkey('x', stop_speech)
-            hotkeys = True
+        if listening:
+            if hotkeys is False:
+                toggle_hotkeys()
             print(Fore.WHITE + "Press 'q' to stop listening. Press 'Space' to toggle speech. Press 'x' to stop TTS response")
             user_input = recognize_speech_from_mic()
-            if user_input is not None:
-                sleep(5)
         else:
             if hotkeys:
-                hotkeys = False
-                keyboard.remove_hotkey('q')
-                keyboard.remove_hotkey('space')
-                keyboard.remove_hotkey('x')
+                toggle_hotkeys()
             user_input = input(Fore.GREEN + "User: ")
             # Split command or user query into individual words
             command_parts = user_input.split()
@@ -787,7 +794,7 @@ def run_assistant():
                 print("exit                  - closes the program                                                 ")
                 print(Back.BLACK + Fore.WHITE)
                 continue
-        if user_input is not ["exit", "quit", "retrieve", "clear", "cls", "stop", "shut", "upload", "speech", "listen", "help", "?"]:
+        if user_input:
             try:
                 loggerfunc.log(f"User: {user_input}", thread_id)
                 loggerfunc.newline(thread_id)
